@@ -1,4 +1,4 @@
-package app.model
+package model
 
 trait Ticket {
   val id: Long
