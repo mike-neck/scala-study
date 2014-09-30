@@ -1,7 +1,7 @@
 package repo
 
 import model.TicketStatus.Fixed
-import model.{Bug, Issue, Ticket}
+import model.{TicketStatus, Bug, Issue, Ticket}
 
 object TicketRepo {
   private var map: Map[TicketId, Ticket] = Map(
@@ -31,5 +31,14 @@ object TicketRepo {
     val bug: Bug = Bug(nextId, title, description)
     map = map + (nextId -> bug)
     bug
+  }
+
+  def findIssuesByStatus(status: String): Option[Seq[Issue]] = {
+    val st: Option[TicketStatus] = TicketStatus.of(status)
+    st.map(s => {
+      map.values.toSeq collect {
+        case x: Issue if x.status == s => x
+      }
+    })
   }
 }
