@@ -25,4 +25,11 @@ object TicketRepo {
     map = map  + (nextId -> issue)
     issue
   }
+
+  def createBug(title: String, description: String): Bug = {
+    val nextId: TicketId = map.keys.max + 1
+    val bug: Bug = Bug(nextId, title, description)
+    map = map + (nextId -> bug)
+    bug
+  }
 }
