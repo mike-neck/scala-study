@@ -10,4 +10,10 @@ object TicketRepo {
     3L -> Bug(3, "メインページの左上のアイコンが違う", "こちらで指定したものを貼り付けてください"),
     4L -> Bug(4, "Next Pageの綴りが違う", "Next PageとするべきところがNext Peijiになってるので直してください", Fixed)
   )
+
+  def findAll(): Seq[Ticket] = {
+    map.values.toSeq.sortBy(new Function1[Ticket, TicketId]{
+      def apply(t: Ticket): TicketId = t.id
+    })
+  }
 }
