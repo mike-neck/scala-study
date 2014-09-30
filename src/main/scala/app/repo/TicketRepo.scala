@@ -12,6 +12,6 @@ object TicketRepo {
   )
 
   def findAll(): Seq[Ticket] = {
-    map.values.toSeq.sortBy((t: Ticket) => t.id)
+    map.values.toSeq.sortBy((t) => t.id)
   }
 }
