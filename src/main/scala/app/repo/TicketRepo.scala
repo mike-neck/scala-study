@@ -12,7 +12,7 @@ object TicketRepo {
   )
 
   def findAll(): Seq[Ticket] = {
-    map.values.toSeq.sortBy(new Function1[Ticket, TicketId]{
+    map.values.toSeq.sortBy(new ((Ticket) => TicketId){
       def apply(t: Ticket): TicketId = t.id
     })
   }
