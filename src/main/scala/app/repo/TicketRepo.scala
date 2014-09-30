@@ -18,4 +18,11 @@ object TicketRepo {
   def findById(id: TicketId): Option[Ticket] = {
     map.get(id)
   }
+
+  def createIssue(title: String): Issue = {
+    val nextId: TicketId = map.keys.max + 1
+    val issue: Issue = Issue(nextId, title)
+    map = map  + (nextId -> issue)
+    issue
+  }
 }
