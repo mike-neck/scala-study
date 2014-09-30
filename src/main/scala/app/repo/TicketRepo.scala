@@ -4,7 +4,7 @@ import model.TicketStatus.Fixed
 import model.{Bug, Issue, Ticket}
 
 object TicketRepo {
-  private var map: Map[Long, Ticket] = Map(
+  private var map: Map[TicketId, Ticket] = Map(
     1L -> Issue(1, "メインページを作る", Fixed),
     2L -> Issue(2, "サブページを作る"),
     3L -> Bug(3, "メインページの左上のアイコンが違う", "こちらで指定したものを貼り付けてください"),
