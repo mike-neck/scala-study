@@ -41,4 +41,13 @@ object TicketRepo {
       }
     })
   }
+
+  def findBugByStatus(status: String): Option[Seq[Bug]] = {
+    val st: Option[TicketStatus] = TicketStatus.of(status)
+    st.map(s => {
+      map.values.toSeq collect {
+        case x: Bug if x.status == s => x
+      }
+    })
+  }
 }
