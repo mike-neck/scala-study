@@ -1,6 +1,6 @@
 package repo
 
-import model.TicketStatus.Fixed
+import model.TicketStatus.{Open, Fixed}
 import model.{TicketStatus, Bug, Issue, Ticket}
 
 object TicketRepo {
@@ -48,6 +48,17 @@ object TicketRepo {
       map.values.toSeq collect {
         case x: Bug if x.status == s => x
       }
+    })
+  }
+
+  def fix(id: TicketId): Boolean = {
+    val ticket: Option[Ticket] = map.values.find(t => t.id == id && t.status == Open)
+    ticket.exists(t => {
+      map = map.updated(t.id, t match {
+        case x: Issue => Issue(x.id, x.title, Fixed)
+        case x: Bug => Bug(x.id, x.title, x.description, Fixed)
+      })
+      true
     })
   }
 }
