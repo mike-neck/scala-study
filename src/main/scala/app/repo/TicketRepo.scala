@@ -20,7 +20,7 @@ object TicketRepo {
   }
 
   def createIssue(title: String): Issue = {
-    val nextId: TicketId = map.keys.max + 1
+    val nextId: TicketId = if (map.isEmpty) 0 else map.keys.max + 1
     val issue: Issue = Issue(nextId, title)
     map = map  + (nextId -> issue)
     issue
